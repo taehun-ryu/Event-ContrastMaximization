@@ -1,0 +1,5 @@
+dataset:
+  h5_path: "/root/datasets/self_dvs/event_cam2/250523/checker.h5"
+  width: 346
+  height: 260
+  bin_width: 0.1
