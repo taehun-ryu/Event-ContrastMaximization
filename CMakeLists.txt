@@ -15,6 +15,7 @@ find_package(Eigen3 REQUIRED)
 find_package(Ceres REQUIRED)
 find_package(HDF5 REQUIRED COMPONENTS C CXX)
 find_package(Pangolin REQUIRED)
+find_package(yaml-cpp REQUIRED)
 ################################################################################
 # Build
 ################################################################################
@@ -33,6 +34,7 @@ target_link_libraries(ibec3 PRIVATE
   Ceres::ceres
   ${HDF5_LIBRARIES}
   ${Pangolin_LIBRARIES}
+  yaml-cpp
 )
 target_include_directories(ibec3 PRIVATE
   include

@@ -7,6 +7,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 # 1. Basic dependencies
 RUN apt update && apt install -y --no-install-recommends \
     build-essential \
+    software-properties-common \
     cmake \
     git \
     wget \
