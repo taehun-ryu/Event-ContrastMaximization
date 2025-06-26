@@ -41,6 +41,7 @@ RUN apt update && apt install -y --no-install-recommends \
     libgflags-dev \
     libatlas-base-dev \
     libsuitesparse-dev \
+    libyaml-cpp-dev \
     && apt clean && rm -rf /var/lib/apt/lists/*
 
 # 2. Install ceres-solver (v2.2.0)
