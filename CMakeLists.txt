@@ -2,7 +2,7 @@
 # Set minimum required version of cmake, project name and compile options
 ################################################################################
 cmake_minimum_required(VERSION 3.8)
-project(IBEC3)
+project(EventCalib)
 
 if(NOT CMAKE_CXX_STANDARD)
   set(CMAKE_CXX_STANDARD 17)
@@ -23,12 +23,12 @@ find_package(yaml-cpp REQUIRED)
 
 
 # ------- C++ -------
-add_executable(ibec3
+add_executable(ecal
   src/main.cpp
-  src/EventData/H5Reader.cpp
-  src/EventData/EventArray.cpp
+  src/EventUtils/IO.cpp
+  src/EventUtils/Processing.cpp
 )
-target_link_libraries(ibec3 PRIVATE
+target_link_libraries(ecal PRIVATE
   ${OpenCV_LIBS}
   Eigen3::Eigen
   Ceres::ceres
@@ -36,7 +36,7 @@ target_link_libraries(ibec3 PRIVATE
   ${Pangolin_LIBRARIES}
   yaml-cpp
 )
-target_include_directories(ibec3 PRIVATE
+target_include_directories(ecal PRIVATE
   include
   ${HDF5_INCLUDE_DIRS}
   ${Pangolin_INCLUDE_DIRS}
@@ -47,7 +47,7 @@ target_include_directories(ibec3 PRIVATE
 # lib/<package>: executable binaries
 install(
   TARGETS
-    ibec3
+    ecal
   DESTINATION lib/${PROJECT_NAME}
 )
 # share/<package>: launch files and other resources
