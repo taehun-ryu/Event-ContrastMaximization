@@ -63,6 +63,6 @@ RUN git clone https://github.com/stevenlovegrove/Pangolin.git --branch v0.9.3 --
  && make -j$(nproc) && make install \
  && ldconfig
 
-# 4. Set working directory to your IBEC3 project
-WORKDIR /IBEC3
-
+# 4. Set working directory to your project
+WORKDIR /workspace
+COPY . /workspace
