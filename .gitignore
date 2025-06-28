@@ -60,3 +60,4 @@ build-*/
 *.txt.user
 *.gch
 /.project
+output/
