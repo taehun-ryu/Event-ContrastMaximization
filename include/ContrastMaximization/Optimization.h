@@ -177,6 +177,26 @@ T computeIweVariance(const JetImage<T>& iwe) {
   return variance;
 }
 
+/// @brief Compute Sum of Squares (SoS) of the IWE image.
+/// @tparam T Ceres Jet type or double.
+/// @param iwe Input IWE image (JetImage<T>)
+/// @return Sum of squared pixel values.
+template <typename T>
+T computeIweSumOfSquares(const JetImage<T>& iwe) {
+  int H = iwe.height();
+  int W = iwe.width();
+  T sum_sq = T(0);
+
+  for (int y = 0; y < H; ++y) {
+    for (int x = 0; x < W; ++x) {
+      T val = iwe(y, x);
+      sum_sq += val * val;
+    }
+  }
+
+  return sum_sq;
+}
+
 /// @brief Ceres CostFunctor for optimizing contrast via IWE loss.
 struct ContrastMaximizationCost {
   ContrastMaximizationCost(const std::vector<double>& xs, const std::vector<double>& ys, const std::vector<double>& ts,
@@ -201,7 +221,7 @@ struct ContrastMaximizationCost {
 
     // Compute the loss of the IWE
     T loss = computeIweVariance(iwe);
-    residual[0] = T(1.0) / sqrt(loss + T(1e-6));  // Is it best way to maximize contrast?
+    residual[0] = T(1.0) / sqrt(loss + T(1e-6));  // THINK Is it best way to maximize contrast?
     return true;
   }
 
