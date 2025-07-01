@@ -42,6 +42,7 @@ RUN apt update && apt install -y --no-install-recommends \
     libatlas-base-dev \
     libsuitesparse-dev \
     libyaml-cpp-dev \
+    python3-tk \
     && apt clean && rm -rf /var/lib/apt/lists/*
 
 # 2. Install ceres-solver (v2.2.0)
@@ -63,6 +64,20 @@ RUN git clone https://github.com/stevenlovegrove/Pangolin.git --branch v0.9.3 --
  && make -j$(nproc) && make install \
  && ldconfig
 
-# 4. Set working directory to your project
+# 4. Install packages for dataformat-convertor
+## Pip package
+RUN pip3 install \
+    h5py \
+    opencv-python \
+    matplotlib
+
+## dv-processing
+RUN apt-get update \
+ && add-apt-repository -y ppa:inivation-ppa/inivation \
+ && apt-get update \
+### dv-processing-python need numpy 1.X
+RUN pip install "numpy<2" && apt-get install -y dv-processing-python
+
+# 5. Set working directory to your project
 WORKDIR /workspace
 COPY . /workspace
