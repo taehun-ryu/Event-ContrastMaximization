@@ -73,3 +73,19 @@ Eigen::MatrixXd readEventsAsMatrix(const std::string& file_path) {
 
   return events;
 }
+
+std::string createOutputDirectory() {
+  auto now = std::chrono::system_clock::now();
+  std::time_t now_c = std::chrono::system_clock::to_time_t(now);
+  std::tm tm_local = *std::localtime(&now_c);
+
+  std::ostringstream oss;
+  oss << "../output/" << std::put_time(&tm_local, "%Y%m%d_%H%M%S");
+  std::string dir_path = oss.str();
+
+  if (!std::filesystem::exists(dir_path)) {
+    std::filesystem::create_directories(dir_path);
+  }
+
+  return dir_path;
+}

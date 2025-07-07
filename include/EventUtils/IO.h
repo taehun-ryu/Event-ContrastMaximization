@@ -2,6 +2,8 @@
 #include <H5Cpp.h>
 
 #include <Eigen/Dense>
+#include <chrono>
+#include <filesystem>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -20,3 +22,7 @@ void readEventsAsComponentVectors(const std::string& file_path, std::vector<doub
 /// @param file_path Path to the HDF5 file.
 /// @return A 4xN Eigen::MatrixXd containing [x; y; t; p] for each event.
 Eigen::MatrixXd readEventsAsMatrix(const std::string& file_path);
+
+/// @brief Create output directory with current datetime in format YYYYMMDD_HHMMSS
+/// @return Full path to the created directory
+std::string createOutputDirectory();

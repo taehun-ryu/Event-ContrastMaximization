@@ -1,5 +1,10 @@
 dataset:
-  h5_path: "/root/datasets/self_dvs/event_cam2/250523/checker.h5"
+  h5_path: "/root/datasets/self_dvs/event_cam2/checker6x5/checker6x5_250702.h5"
   width: 346
   height: 260
   bin_width: 0.1
+
+checkerboard:
+  board_h: 5
+  board_w: 4
+  square_size: 0.035

@@ -27,6 +27,8 @@ add_executable(ecal
   src/main.cpp
   src/EventUtils/IO.cpp
   src/EventUtils/Processing.cpp
+  src/ContrastMaximization/Optimization.cpp
+  src/ContrastMaximization/Evaluation.cpp
 )
 target_link_libraries(ecal PRIVATE
   ${OpenCV_LIBS}

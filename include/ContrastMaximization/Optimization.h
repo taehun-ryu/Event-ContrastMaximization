@@ -4,6 +4,7 @@
 #include <ceres/jet.h>
 
 #include <Eigen/Core>
+#include <opencv2/opencv.hpp>
 #include <type_traits>
 #include <vector>
 
@@ -134,9 +135,9 @@ void generateIWE_usingWarpFunction(const std::vector<T>& xs, const std::vector<T
 
 /// @brief Compute gradient-magnitude of an IWE.
 /// @param iwe Input IWE image (already filled)
-/// @return Sum of squared gradient magnitudes (∇IWE)²
+/// @return Sum of squared gradient magnitudes
 template <typename T>
-T computeIweGradientMagnitude(const JetImage<T>& iwe) {
+T computeIweGradientMagnitude(const JetImage<T>& iwe) {  // TODO Check whether this impl; is right.
   int H = iwe.height();
   int W = iwe.width();
   T total = T(0);
@@ -232,3 +233,11 @@ struct ContrastMaximizationCost {
   double t_ref_;
   int H_, W_;
 };
+
+void optimize(std::vector<double>& params, const std::vector<double>& xs, const std::vector<double>& ys,
+              const std::vector<double>& ts, const std::vector<double>& ps, const double& t_ref, const int& width,
+              const int& height);
+
+cv::Mat getIWE(JetImage<double>& iwe, const LinearWarpFunction& warp_function, std::vector<double>& params,
+               const std::vector<double>& xs, const std::vector<double>& ys, const std::vector<double>& ts,
+               const std::vector<double>& ps, const double& t_ref, const int width, const int height);
