@@ -72,9 +72,9 @@ RUN pip3 install \
     matplotlib
 
 ## dv-processing
-RUN apt-get update \
- && add-apt-repository -y ppa:inivation-ppa/inivation \
- && apt-get update \
+RUN apt-get update && apt-get install -y gnupg software-properties-common
+RUN add-apt-repository -y ppa:inivation-ppa/inivation
+RUN apt-get update
 ### dv-processing-python need numpy 1.X
 RUN pip install "numpy<2" && apt-get install -y dv-processing-python
 
